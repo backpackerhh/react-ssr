@@ -15,11 +15,33 @@ class Grid extends Component {
 
     this.state = {
       repos,
+      loading: !repos,
+    };
+    this.fetchRepos = this.fetchRepos.bind(this);
+  }
+
+  componentDidMount() {
+    if (!this.state.repos) {
+      this.fetchRepos(this.props.match.params.id);
     }
   }
 
+  fetchRepos(lang) {
+    this.setState(() => { loading: true });
+
+    this.props.fetchInitialData(lang)
+      .then((repos) => this.setState(() => ({
+        repos,
+        loading: false,
+      })));
+  }
+
   render() {
-    const { repos } = this.state;
+    const { repos, loading } = this.state;
+
+    if (loading) {
+      return <p>Loading...</p>;
+    }
 
     return (
       <ul style={{display: 'flex', flexWrap: 'wrap'}}>

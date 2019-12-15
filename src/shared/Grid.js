@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class Grid extends Component {
   render() {
-    const repos = this.props.data
+    const repos = this.props.staticContext.data;
 
     return (
       <ul style={{display: 'flex', flexWrap: 'wrap'}}>

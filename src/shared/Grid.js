@@ -26,6 +26,12 @@ class Grid extends Component {
     }
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.match.params.id !== this.props.match.params.id) {
+      this.fetchRepos(this.props.match.params.id);
+    }
+  }
+
   fetchRepos(lang) {
     this.setState(() => { loading: true });
 
